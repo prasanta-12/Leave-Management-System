@@ -1,0 +1,123 @@
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+   font-family: 'Open Sans', sans-serif;
+}
+
+.logodiv{
+    display: inline-block;
+
+}
+
+
+/* Navbar */
+#myNav{
+    text-align: end;
+    background-color: #9d8189;
+}
+/* Employee Table */
+#projectTable{
+    border-radius: 15px;
+    margin-top: 2rem;
+}
+/* navbar logo */
+#logo{
+    text-align: left;
+    color: white;
+    
+}
+/* navbar button for add employee */
+.addBtn{
+    border:3px solid #f4acb7 ;
+    color: white;
+    margin-right: 1.5rem;
+    transition-duration: 500ms;
+}
+
+.addBtn:hover{
+    border:3px solid #f4acb7 ;
+    border: none;
+    background-color: #f4acb7;
+    color: whitesmoke;
+    transition-duration: 500ms;
+}
+
+.submitBtn{
+    background-color: #9d8189;
+    border: none;
+    color: white;
+    font-weight: 550;
+    transition-duration: 400ms;
+  }
+  .submitBtn:hover{
+    background-color: #f4acb7;
+    border: none;
+    transition-duration: 400ms;
+  }
+
+.bg-info {
+    background-color: #9d8189;
+}
+
+	/* Table Action */
+	.acn_item{
+        color: #9d8189;
+        transition-duration: 300ms;
+    }
+    .acn_item:hover{
+        color: #f4acb7;
+        font-size: large;
+        transition-duration: 300ms;
+    }
+
+    .btn-outline-primary {
+        
+        border-color: #f4acb7;
+    }
+
+    /* media queries to make page responsive */
+
+    @media(max-width:998px){
+        html{
+            font-size:55%
+        }
+
+    }
+
+    @media(max-width:500px){
+        table thead{
+            display:none;
+        }
+
+        table, table tbody, table tr, table td{
+            display: block;
+            width: 100%;
+        }
+
+        table tr{
+            margin-bottom: 15px;
+        }
+
+        table td{
+            text-align: right;
+            padding-left: 50%;
+            text-align: right;
+            position: relative;
+        }
+
+        table td::before{
+            content: attr(datalabel);
+            position: absolute;
+            left: 0;
+            width:50%;
+            padding-left: 15px;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: left;
+        }
+    }
