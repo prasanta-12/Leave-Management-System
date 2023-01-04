@@ -79,4 +79,33 @@ public class ManagerService {
 	leave.setStatus("Approved");
 	}
 	
+	public void initializeLT(Manager manager) {
+		manager.setSickLeave(15);
+		manager.setCasualLeave(15);
+		manager.setPersonalLeave(15);
+		manager.setMaternityLeave(180);
+		manager.setPaternityLeave(30);
+		manager.setMarriageLeave(15);
+		manager.setAdoptionLeave(30);
+	}
+	//Set Username and Password
+			public void generateUsernameAndPassword(Manager manager) {
+				StringBuilder sb=new StringBuilder();
+				String fullname=manager.getFullname();
+				String contact=manager.getContact();
+				for(int i=0;i<fullname.length();i++) {
+					char ch=fullname.charAt(i);
+					if(ch==' ')break;
+					
+					sb.append(ch);
+				}
+				sb.append('@');
+				sb.append(contact.substring(6, 10));
+				
+				manager.setUsername(sb.toString());
+				manager.setPassword(sb.toString());
+				
+			}
+			
+	
 }

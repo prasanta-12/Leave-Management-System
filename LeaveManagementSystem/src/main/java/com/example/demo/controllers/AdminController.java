@@ -29,7 +29,7 @@ import com.example.demo.repository.ManagerRepository;
 import com.example.demo.service.AdminService;
 
 import com.example.demo.service.EmpService;
-
+import com.example.demo.service.ManagerService;
 import com.example.demo.service.SendMail;
 
 @Controller
@@ -311,6 +311,100 @@ public class AdminController {
 				adminRepository.save(admin);				
 				}
 				return new ModelAndView("redirect:/logout");
+			}
+		 
+		 //Manage manager by admin
+		 
+		 // Adding an manager by Admin
+		 @GetMapping("/add_manager")
+			public ModelAndView addManager(Manager manager,HttpSession session) {
+			 List<Admin>admins=adminRepository.findAll();
+			 Manager oldManager=manRepository.findByEmail(manager.getEmail());
+			 ManagerService mservice=new ManagerService();	 
+			 Admin admin=new Admin();
+			 int id=0;
+			 for(Admin a:admins) {
+				 id=a.getId();
+				 admin=a;
+			 }
+			 if(oldManager!=null) {
+				String managerExtErr="Email already exists try other email";
+					session.setAttribute("managerExtErr", managerExtErr);
+					return new ModelAndView("redirect:/set_add_manager?id="+id);
+			 }
+			 mservice.initializeLT(manager);
+			 mservice.generateUsernameAndPassword(manager);
+			 String semail=manager.getEmail();
+				mservice.generateUsernameAndPassword(manager);
+				String password=manager.getPassword();
+				String userAndPass="Hi, your BIZHUB account has been created. Your Username is : "+semail+" and Password : "+password;
+				mailservice.sendMail(semail,"Username And Password for BIZHUB ",userAndPass,admin.getEmail());			
+				manRepository.save(manager);
+				return new ModelAndView("redirect:/viewmanagers?id="+id);
+			}
+		 // Setting data(List of admins in add manager from in Reporting Person drop-down
+		 @GetMapping("/set_add_manager")
+			public ModelAndView setManager(@RequestParam("id") int id) {
+			 Admin admin=adminRepository.findById(id);
+			 List<Admin> admins=adminRepository.findAll();
+				ModelAndView mview=new ModelAndView();
+				mview.setViewName("addManager.jsp");
+				mview.addObject("admin", admin);
+				mview.addObject("admins", admins);
+				return mview;
+			}
+		 // View Manager List
+		 @GetMapping("/viewmanagers")
+			public ModelAndView displayManagerDetails(@RequestParam("id") int id) {
+			    Admin admin=adminRepository.findById(id);
+				List<Manager> managers=manRepository.findAllByStatus("Active");
+				ModelAndView mview=new ModelAndView();
+				mview.setViewName("viewManagerTable.jsp");
+				mview.addObject("managers", managers);
+				mview.addObject("admin", admin);
+				return mview;
+			}
+		 //Delete an Manager
+			@GetMapping("/delete_manager")
+			public ModelAndView deleteManager(@RequestParam("id") int id) {
+				List<Admin> admins=adminRepository.findAll();
+				int adminId=0;
+				for(Admin a:admins) {
+					adminId=a.getId();
+				}
+				System.out.println(id);
+				Manager manager=manRepository.findById(id);
+				manager.setStatus("Inactive");
+				manRepository.save(manager);
+				return new ModelAndView("redirect:/viewmanagers?id="+adminId);
+			}
+			//set edit page for manager an manager
+			@GetMapping("/edit_manager")
+			public ModelAndView editManager(@RequestParam("id") int id) {
+				Manager manager=manRepository.findById(id);
+				ModelAndView mview=new ModelAndView();
+				List<Admin> admins=adminRepository.findAll();
+				Admin admin=new Admin();
+				for(Admin a:admins) {
+					admin=a;
+				}
+				mview.setViewName("editManager.jsp");
+				mview.addObject("manager", manager);
+				mview.addObject("admin", admin);
+				mview.addObject("admins", admins);
+				return mview;
+				
+			}
+			//Update an Manager
+			@RequestMapping("/update_manager")
+			public ModelAndView updateManager(Manager manager) {
+				List<Admin> admins=adminRepository.findAll();
+				int adminId=0;
+				for(Admin a:admins) {
+					adminId=a.getId();
+				}
+				manRepository.save(manager);
+				return new ModelAndView("redirect:/viewmanagers?id="+adminId);
 			}
 		 
 }
