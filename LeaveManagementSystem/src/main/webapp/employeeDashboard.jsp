@@ -12,6 +12,16 @@
   <link rel="stylesheet" href="assets/css/style.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha512-I5TkutApDjnWuX+smLIPZNhw+LhTd8WrQhdCKsxCFRSvhFx2km8ZfEpNIhF9nq04msHhOkE8BMOBj5QE07yhMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+ 
+  <style>
+  .content-wrapper{
+ background-image: url("emp1.jpg");
+ background-repeat: no-repeat;
+ background-size: cover;
+}
+  </style>
  </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -38,6 +48,9 @@
         </li>
         </ul>
   </nav>
+  
+
+  <!-- sidebar -->
   <aside class="main-sidebar text-white elevation-4">
     <a href="" class="brand-link">
       <img src="CSS/icons.png" class="brand-image">
@@ -79,7 +92,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="../UI/Leavepolicy.html" class="nav-link">
+              <a href="view_leave_policy_employee?id=<c:out value='${employee.id}'/>" class="nav-link">
                   <i class="fa fa-address-book"></i>
                <p class="text-white">
                 &nbsp;&nbsp;Leave Policy</p> 
@@ -92,6 +105,13 @@
                 &nbsp;&nbsp;My Profile</p> 
               </a>
             </li>
+            <li class="nav-item">
+              <a  class="nav-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+             <i class='fas fa-user-lock'></i></i><p class="text-white">
+                &nbsp;&nbsp;Reset Password</p> 
+            </a>
+               
+            </li>
           </ul>
         </nav>
       </div>
@@ -99,64 +119,126 @@
   <div class="content-wrapper">
     <section class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="row">
-            <div class="col-sm-6 col-lg-3">
-              <div class="card card1">
-                <div class="card-body">
-                  <div class="fs-4 fw-semibold text-white">0</div>
-                  <div class="widfont">Pending</div>
-                  <div class="progress progress-thin my-2">
-                    <div class="progress-bar bg-success" role="progressbar" style="width:0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- /.col-->
-            <div class="col-sm-6 col-lg-3">
-              <div class="card card2">
-                <div class="card-body">
-                  <div class="fs-4 fw-semibold text-white">2</div>
-                  <div class="widfont">Approved</div>
-                  <div class="progress progress-thin my-2">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 2%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- /.col-->
-            <div class="col-sm-6 col-lg-3">
-              <div class="card card1">
-                <div class="card-body">
-                  <div class="fs-4 fw-semibold text-white">3</div>
-                  <div class="widfont">Rejected</div>
-                  <div class="progress progress-thin my-2">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 3%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- /.col-->
-            <div class="col-sm-6 col-lg-3">
-              <div class="card card2">
-                <div class="card-body">
-                  <div class="fs-4 fw-semibold text-white">5</div>
-                  <div class="widfont">Days Off</div>
-                  <div class="progress progress-thin my-2">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 5%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- /.col-->
-          </div>
-        </div>
+        
       </div>
     </section>
   </div>
+  
+    <!-- reset modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Reset Password</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+    <form action="reset_pass_employee" name="ResetForm" id="ResetForm" onsubmit="return Validation()" method="post">
+          <div class="modal-body ">
+            <div class="container-fluid">
+
+                <div class="row p-3">
+                      <div class="col-md-10">
+                        <label  class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email"  id="email" required>
+                        <span id="emailerror" class="text-danger font-weight-bold"></span>
+                      </div>
+                </div>
+            <!--  <div class="row p-3"> -->
+                    <div class="col-md-10" >
+                       <!--  <label  class="form-label">Enter old Password</label> -->
+                        <input type="hidden" class="form-control" name="oldPass" id="oldPass"value="${employee.password}" required>
+                        <span id="oldPassErr" class="text-danger font-weight-bold"></span>
+                      </div>
+             <!--    </div>  -->
+                <div class="row p-3">
+                    <div class="col-md-10" >
+                        <label  class="form-label">Enter old Password new</label>
+                        <input type="password" class="form-control" name="oldPass1" id="oldPass1" required>
+                        <span id="oldPassErr1" class="text-danger font-weight-bold"></span>
+                      </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col-md-10">
+                        <label  class="form-label">Enter New Password</label>
+                        <input type="password" class="form-control" name="newPass" id="newPass" required>
+                        <span id="newPassErr" class="text-danger font-weight-bold"></span>
+                      </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col-md-10">
+                        <label  class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-control" name="connewPass" id="connewPass" required>
+                        <span id="ConnewPassErr" class="text-danger font-weight-bold"></span>
+                      </div>
+                </div>
+              </div>
+                <div class="modal-footer p-3">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Reset</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+    </div>
+    <!-- reset modal end -->
   <aside class="control-sidebar control-sidebar-dark">
   </aside>
 </div>
+<script>
+
+  function Validation(){
+
+    let valid=true;
+    const username=document.getElementById('email').value;
+    const password=document.getElementById('newPass').value;
+    const firstoldpassword=document.getElementById('oldPass').value;
+    const secondoldpassword=document.getElementById('oldPass1').value;
+    const confirmPass=document.getElementById('connewPass').value
+    const emailcheck=/^[A-Za-z_.0-9]{3,}@[A-Za-z]{3,}[.]{1}[a-zA-Z.]{2,6}$/;
+    const passwordcheck=/^(?=.[0-9])(?=.[!@#$%^&])[A-Za-z0-9!@#$%^&]{8,16}$/;
+
+    // check email of employee
+  if (emailcheck.test(username)){
+    document.getElementById('emailerror').innerHTML=""
+  }
+  else{
+    document.getElementById('emailerror').innerHTML="Email is Invalid";
+    valid=false;
+  }
+
+  // check password of user
+  /* if (passwordcheck.test(password)){
+     document.getElementById('newPassErr').innerHTML=""
+  }
+  else{
+     document.getElementById('newPassErr').innerHTML="Password is Invalid";
+     valid=false;
+  } */
+// check password of user old pass
+  if (firstoldpassword===secondoldpassword){
+     document.getElementById('oldPassErr1').innerHTML=""
+  }
+  else{
+     document.getElementById('oldPassErr1').innerHTML="Password is Invalid";
+     valid=false;
+  }
+
+
+  // check password of user
+  if (password!=confirmPass){
+     document.getElementById('ConnewPassErr').innerHTML="Password did not match"
+     valid=false;
+  }
+  else{
+     document.getElementById('ConnewPassErr').innerHTML="";
+     
+  }
+       
+   return valid;
+  }
+
+</script>
 <script>
 function updateTime() {
   // Getting the current time

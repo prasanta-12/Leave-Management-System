@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LMS | Add Employee</title>
+  <title>LMS | Edit Employee</title>
     <!-- bootstrap modal-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha512-I5TkutApDjnWuX+smLIPZNhw+LhTd8WrQhdCKsxCFRSvhFx2km8ZfEpNIhF9nq04msHhOkE8BMOBj5QE07yhMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -39,15 +39,14 @@
         %>
             <script>
                 alert("<%= EmExtErr %>");
-                <%= EmExtErr="" %>
+                <%= EmExtErr=null %>
             </script>
         <%
             }
         %>
 
-<!-- Side Navigation Bar start -->
 <div class="wrapper">
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+ <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
@@ -58,7 +57,7 @@
             <button class="btn btn-navbar" type="submit">
              <div class="nav-item text-white" id="time-container"></div>
              </button>
-          <!--  </a> -->
+           </a>
          </li>
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
@@ -70,7 +69,7 @@
             </a>
             <div class="dropdown-divider"></div>
             <a href="" class="dropdown-item text-white nav-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-              <i class="fas fa-envelope mr-2"></i>Reset Password
+             <i class='fas fa-user-lock'></i></i>Reset Password
             </a>
             <div class="dropdown-divider"></div>
             <a href="logout" class="dropdown-item text-white">
@@ -87,10 +86,9 @@
           <h1 class="modal-title fs-5" id="staticBackdropLabel">Reset Password</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="#" name="ResetForm" id="ResetForm" onsubmit="return Validation()" method="post">
+    <form action="reset_pass_admin" name="ResetForm" id="ResetForm" onsubmit="return Validation()" method="post">
           <div class="modal-body ">
             <div class="container-fluid">
-
                 <div class="row p-3">
                       <div class="col-md-10">
                         <label  class="form-label">Email</label>
@@ -98,11 +96,16 @@
                         <span id="emailerror" class="text-danger font-weight-bold"></span>
                       </div>
                 </div>
+                    <div class="col-md-10" >
+                       <!--  <label  class="form-label">Enter old Password</label> -->
+                        <input type="hidden" class="form-control" name="oldPass" id="oldPass"value="${admin.password}" required>
+                        <span id="oldPassErr" class="text-danger font-weight-bold"></span>
+                      </div>
                 <div class="row p-3">
                     <div class="col-md-10" >
-                        <label  class="form-label">Enter old Password</label>
-                        <input type="password" class="form-control" name="oldPass" id="oldPass" required>
-                        <span id="oldPassErr" class="text-danger font-weight-bold"></span>
+                        <label  class="form-label">Enter old Password new</label>
+                        <input type="password" class="form-control" name="oldPass1" id="oldPass1" required>
+                        <span id="oldPassErr1" class="text-danger font-weight-bold"></span>
                       </div>
                 </div>
                 <div class="row p-3">
@@ -112,26 +115,29 @@
                         <span id="newPassErr" class="text-danger font-weight-bold"></span>
                       </div>
                 </div>
-
-                  
-              </div>
+                <div class="row p-3">
+                    <div class="col-md-10">
+                        <label  class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-control" name="connewPass" id="connewPass" required>
+                        <span id="ConnewPassErr" class="text-danger font-weight-bold"></span>
+                      </div>
+                </div>
               </div>
                 <div class="modal-footer p-3">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary " >Reset</button>
+                    <button type="submit" class="btn btn-primary">Reset</button>
                 </div>
-              </form>
+              </div>
             </div>
-
-         </div>
+          </div>
+        </form>
     </div>
-  </div>
-  <aside class="main-sidebar text-white elevation-4">
-    <a href="" class="brand-link">
+   <aside class="main-sidebar text-white elevation-4">
+     <a href="" class="brand-link">
       <img src="CSS/icons.png" class="brand-image">
       <span class="brand-text font-weight-larger" id="logo">BIZHUB</span></a>
-      
- <div class="sidebar">
+
+  <div class="sidebar">
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" role="menu" data-accordion="false">
           <li class="nav-item">
@@ -159,13 +165,13 @@
           </li>
            <li class="nav-item">
             <a href="view_leaves_admin?id=<c:out value='${admin.id}'/>" class="nav-link">
-                <i class="fa fa-list-alt"></i>
+               <i class='fa fa-history'></i>
               <p class="text-white">
                 &nbsp;&nbsp;My Leave History</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="../UI/addLeavepolicy.html" class="nav-link">
+            <li class="nav-item">
+            <a href="addLeavePolicy.jsp" class="nav-link">
                 <i class="fa fa-address-book"></i>
              <p class="text-white">
               &nbsp;&nbsp;Leave Policy</p> 
@@ -196,22 +202,22 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="../UI/addProject.html" class="nav-link">
+            <a href="addProjectAdmin.jsp" class="nav-link">
                 <i class="fas fa-project-diagram"></i>
                 <p class="text-white">
                   &nbsp;&nbsp;Project
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="../UI/addmanager.html" class="nav-link">
+            <li class="nav-item">
+            <a href="set_add_manager?id=<c:out value='${admin.id}'/>" class="nav-link">
               <i class='fas fa-user-lock'></i>
              <p class="text-white">
               &nbsp;&nbsp;Add Manager</p> 
             </a>
           </li>
           <li class="nav-item">
-            <a href="../UI/manageMR.html" class="nav-link">
+            <a href="viewmanagers?id=<c:out value='${admin.id}'/>" class="nav-link">
               <i class='fas fa-user-edit'></i>
              <p class="text-white">
               &nbsp;&nbsp;Manage Manager</p> 
@@ -227,18 +233,18 @@
       <div class="container-fluid">
         <div class="container" align="center">
           <h3 class="m-2" style="padding-top:3px;">
-               Add Employee
+              Edit Employee
           </h3>
         </div>
         <br>
         <section class="container my-2 w-50 p-2 text-dark shadow bg-white " id="form-data">
     
-            <form class="row g-3 p-3" action="update_emp" name="addEmpForm"  id="form"  onsubmit="return validation()">
+            <form class="row g-3 p-3" action="update_emp" name="addEmpForm"  id="form" method="post" onsubmit="return validation()">
                 
                 <div class="col-md-6">
                   <label for="fullName" class="form-label">Full name</label>
+                  <input type="hidden" value="${employee.id}" name="id" >
                     <input type="text" value="${employee.fullname}" class="form-control" id="fullName" name="fullname" required>
-                   <%--  <input type="hidden" value="${admin.id}" name="adminId"> --%>
                    <span id="usererror" class="text-danger font-weight-bold"></span>
                 </div>
     
@@ -258,7 +264,7 @@
                 <div class="col-md-6">
                     <label for="designation" class="form-label">Choose Designation</label>
                     <select id="designation" class="form-select"  name="designation">
-                      <option selected>${employee.designation}</option>
+                      <option selected>{employee.designation}</option>
                       <option>Frontend Developer</option>
                       <option>Backend Developer</option>
                       <option>Fullstack Developer</option>
@@ -276,20 +282,10 @@
                   <span id="roleerror" class="text-danger font-weight-bold"></span>
                 </div>
     
-                <!-- <div class="col-md-6">
-                    <label for="location" class="form-label">Choose Location</label>
-                    <select id="location" class="form-select" name="role">
-                      <option selected>Choose...</option>
-                      <option>Mumbai</option>
-                      <option>Benglore</option>
-                    </select>
-                    <span id="locationerror" class="text-danger font-weight-bold"></span>
-                </div> -->
-    
                 <div class="col-md-6">
                   <label for="role" class="form-label">Reporting Person</label>
                   <select id="role" class="form-select" name="reportingPerson">
-                    <option value="${repMan.email}" selected>${repMan.fullname}</option>
+                    <option value="${employee.reportingPerson}"selected>${repMan.email }</option>
                     <c:forEach items="${managers }" var="manager">
                     <option value="${manager.email}">${manager.fullname}</option>
                     </c:forEach>
@@ -310,16 +306,16 @@
     
                 <div class="col-md-6">
                   <label for="birthdate" class="form-label">Birth Date</label>
-                  <input type="date" value="${employee.dob}" class="form-control" id="birthdate" name="dob" placeholder="dd-mm-yyyy" required>
+                  <input type="date" value="${employee.dob}" class="form-control" id="birthdate" name="dob" required>
               </div>
               
               <div class="col-md-6">
                 <label for="joiningdate" class="form-label">Joining Date</label>
-                <input type="date" value="${employee.doj}" class="form-control" id="joiningdate" name="doj" placeholder="dd-mm-yyyy" required>
+                <input type="date" value="${employee.doj}" class="form-control" id="joiningdate" name="doj"  required>
             </div>
             <div class="col-12">
               <label for="inputEmail" class="form-label">Address</label>
-              <textarea  class="form-control" name="address" id="inputEmail" cols="3" rows="2">${employee.address}</textarea>
+              <textarea class="form-control" name="address" id="inputEmail" cols="3" rows="2">${employee.address}</textarea>
             </div>
                 
             <div class="col-12">
@@ -329,12 +325,12 @@
               </form>
         </section>
       </div>
-       </div>
+       </div> 
     </section>
-  </div>
+ <!--  </div> -->
   <aside class="control-sidebar control-sidebar-dark">
   </aside>
-</div> 
+</div>
     <!-- script tag start here -->
 <script >
 

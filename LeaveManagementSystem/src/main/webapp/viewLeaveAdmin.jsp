@@ -181,8 +181,6 @@ font-size: 1rem;
                         <span id="newPassErr" class="text-danger font-weight-bold"></span>
                       </div>
                 </div>
-
-                  
               </div>
                 <div class="modal-footer p-3">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -195,7 +193,7 @@ font-size: 1rem;
     </div>
    <aside class="main-sidebar text-white elevation-4">
      <a href="" class="brand-link">
-      <img src="CSS/icons.png" class="brand-image">
+      <img src="icons.png" class="brand-image">
       <span class="brand-text font-weight-larger" id="logo">BIZHUB</span></a>
       
  <div class="sidebar">
@@ -226,13 +224,13 @@ font-size: 1rem;
           </li>
            <li class="nav-item">
             <a href="view_leaves_admin?id=<c:out value='${admin.id}'/>" class="nav-link">
-                <i class='fa fa-history'></i>
+               <i class='fa fa-history'></i>
               <p class="text-white">
                 &nbsp;&nbsp;My Leave History</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="AddLeavepolicy.jsp" class="nav-link">
+            <li class="nav-item">
+            <a href="addLeavePolicy.jsp" class="nav-link">
                 <i class="fa fa-address-book"></i>
              <p class="text-white">
               &nbsp;&nbsp;Leave Policy</p> 
@@ -263,22 +261,22 @@ font-size: 1rem;
             </a>
           </li>
           <li class="nav-item">
-            <a href="../UI/addProject.html" class="nav-link">
+            <a href="addProjectAdmin.jsp" class="nav-link">
                 <i class="fas fa-project-diagram"></i>
                 <p class="text-white">
                   &nbsp;&nbsp;Project
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="../UI/addmanager.html" class="nav-link">
+            <li class="nav-item">
+            <a href="set_add_manager?id=<c:out value='${admin.id}'/>" class="nav-link">
               <i class='fas fa-user-lock'></i>
              <p class="text-white">
               &nbsp;&nbsp;Add Manager</p> 
             </a>
           </li>
           <li class="nav-item">
-            <a href="../UI/manageMR.html" class="nav-link">
+            <a href="viewmanagers?id=<c:out value='${admin.id}'/>" class="nav-link">
               <i class='fas fa-user-edit'></i>
              <p class="text-white">
               &nbsp;&nbsp;Manage Manager</p> 
@@ -320,6 +318,39 @@ font-size: 1rem;
 		
 			</table>
 			
+			<h3>Leave Balance</h3>
+			<table class="table table-dark table-striped caption-top table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th> </th>
+						<th>Sick Leave</th>
+						<th>Casual Leave</th>
+						<th>Personal Leave</th>
+						<th>Maternity Leave</th>
+						<th>Paternity Leave</th>
+						<th>Marriage Leave</th>
+						<th>Adoption Leave</th>
+					</tr>
+				</thead>
+				
+				<tbody class="table-group-divider">
+				<%-- <c:forEach items="${leaves }" var="leave"> --%>
+				<tr class="table-active">
+                        <th scope="row">Days</th>
+                        <td>${admin.sickLeave }</td>
+                        <td>${admin.casualLeave }</td>
+                        <td>${admin.personalLeave }</td>
+                        <td>${admin.maternityLeave }</td>
+                        <td>${admin.paternityLeave }</td>
+                        <td>${admin.marriageLeave }</td>
+                        <td>${admin.adoptionLeave }</td>
+                        
+                      </tr>
+				<%-- </c:forEach> --%>
+                  
+				  </tbody>
+		
+			</table>
 		</div>
     </section>
   </div>

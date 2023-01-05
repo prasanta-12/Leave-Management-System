@@ -3,12 +3,23 @@ package com.example.demo.service;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Admin;
+import com.example.demo.model.Employee;
 import com.example.demo.model.Leave;
 import com.example.demo.model.Manager;
 
 @Service
 public class AdminService {
 
+	
+	public void initializeLT(Manager manager) {
+		manager.setSickLeave(15);
+		manager.setCasualLeave(15);
+		manager.setPersonalLeave(15);
+		manager.setMaternityLeave(180);
+		manager.setPaternityLeave(30);
+		manager.setMarriageLeave(15);
+		manager.setAdoptionLeave(30);
+	}
 	public int calcutaleLeaveBalance(Leave leave,Admin admin) {
 		int count=0;
 		String leaveType=leave.getLeaveType();

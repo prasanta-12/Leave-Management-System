@@ -109,11 +109,14 @@ font-size: 1rem;
 </head>
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
- <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
+         <li class="nav-item">
+          <a href="#" class="btn" data-toggle="modal" data-target="#basicModal">Holiday<i class='fa fa-plus-circle' style='color: white'></i></a>
+        </li>
     </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
@@ -149,7 +152,7 @@ font-size: 1rem;
           <h1 class="modal-title fs-5" id="staticBackdropLabel">Reset Password</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="#" name="ResetForm" id="ResetForm" onsubmit="return Validation()" method="post">
+    <form action="reset_pass_admin" name="ResetForm" id="ResetForm" onsubmit="return Validation()" method="post">
           <div class="modal-body ">
             <div class="container-fluid">
 
@@ -160,11 +163,18 @@ font-size: 1rem;
                         <span id="emailerror" class="text-danger font-weight-bold"></span>
                       </div>
                 </div>
+            <!--  <div class="row p-3"> -->
+                    <div class="col-md-10" >
+                       <!--  <label  class="form-label">Enter old Password</label> -->
+                        <input type="hidden" class="form-control" name="oldPass" id="oldPass"value="${admin.password}" required>
+                        <span id="oldPassErr" class="text-danger font-weight-bold"></span>
+                      </div>
+             <!--    </div>  -->
                 <div class="row p-3">
                     <div class="col-md-10" >
-                        <label  class="form-label">Enter old Password</label>
-                        <input type="password" class="form-control" name="oldPass" id="oldPass" required>
-                        <span id="oldPassErr" class="text-danger font-weight-bold"></span>
+                        <label  class="form-label">Enter old Password new</label>
+                        <input type="password" class="form-control" name="oldPass1" id="oldPass1" required>
+                        <span id="oldPassErr1" class="text-danger font-weight-bold"></span>
                       </div>
                 </div>
                 <div class="row p-3">
@@ -174,12 +184,17 @@ font-size: 1rem;
                         <span id="newPassErr" class="text-danger font-weight-bold"></span>
                       </div>
                 </div>
-
-                  
+                <div class="row p-3">
+                    <div class="col-md-10">
+                        <label  class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-control" name="connewPass" id="connewPass" required>
+                        <span id="ConnewPassErr" class="text-danger font-weight-bold"></span>
+                      </div>
+                </div>
               </div>
                 <div class="modal-footer p-3">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary " >Reset</button>
+                    <button type="submit" class="btn btn-primary">Reset</button>
                 </div>
               </div>
             </div>
@@ -190,8 +205,8 @@ font-size: 1rem;
        <aside class="main-sidebar text-white elevation-4">
    <a href="" class="brand-link">
       <img src="CSS/icons.png" class="brand-image">
-      <span class="brand-text font-weight-larger" id="logo">BIZHUB</span></a>   
- <div class="sidebar">
+      <span class="brand-text font-weight-larger" id="logo">BIZHUB</span></a>
+  <div class="sidebar">
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" role="menu" data-accordion="false">
           <li class="nav-item">
@@ -256,22 +271,22 @@ font-size: 1rem;
             </a>
           </li>
           <li class="nav-item">
-            <a href="../UI/addProject.html" class="nav-link">
+            <a href="#" class="nav-link">
                 <i class="fas fa-project-diagram"></i>
                 <p class="text-white">
                   &nbsp;&nbsp;Project
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="../UI/addmanager.html" class="nav-link">
+            <li class="nav-item">
+            <a href="set_add_manager?id=<c:out value='${admin.id}'/>" class="nav-link">
               <i class='fas fa-user-lock'></i>
              <p class="text-white">
               &nbsp;&nbsp;Add Manager</p> 
             </a>
           </li>
           <li class="nav-item">
-            <a href="../UI/manageMR.html" class="nav-link">
+            <a href="viewmanagers?id=<c:out value='${admin.id}'/>" class="nav-link">
               <i class='fas fa-user-edit'></i>
              <p class="text-white">
               &nbsp;&nbsp;Manage Manager</p> 
@@ -327,8 +342,6 @@ font-size: 1rem;
     </aside>
   </div>
   <!-- Side Navigation bar end -->
-
-
   <!-- Modal -->
   <div class="modal fade" id="basicModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
@@ -354,12 +367,9 @@ font-size: 1rem;
                         <label  class="form-label">Date</label>
                         <input type="date" class="form-control" name="startHDate" id="strDate" required>
                         <div class="invalidForm">
-
                         </div>
                     </div>
-                     
                   </div>
-                 
                   <div class="row p-3">
                     <div class="col-md-10" id="hDayDesc">
                         <label for="hDayDesc" class="form-label">Description of holiday</label>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.model.Admin;
 import com.example.demo.model.Employee;
 import com.example.demo.model.Holidays;
 import com.example.demo.model.Leave;
@@ -116,6 +117,24 @@ public class EmpController {
 			mview.addObject("leaves", leaves);
  		 return mview;
  	  }
-	
+ 	 @RequestMapping("/reset_pass_emoloyee")
+		public ModelAndView resetPassword(@RequestParam("email") String email,@RequestParam("oldPass1") String oldPass,@RequestParam("newPass") String newPass, HttpSession session) {
+		Employee emoloyee=empRepository.findByEmailAndPassword(email, oldPass);
+			if(emoloyee!=null) {
+			emoloyee.setPassword(newPass);
+			empRepository.save(emoloyee);				
+			}
+			return new ModelAndView("redirect:/logout");
+		}
+ 	  @RequestMapping("/view_leave_policy_employee") 
+	   public ModelAndView viewLeavePolicyEmployee(@RequestParam("id") int id) {
+		System.out.println("employee id : "+id);
+		Employee employee=empRepository.findById(id);
+	   ModelAndView mview=new ModelAndView();
+	   mview.setViewName("viewLeavePolicyEmployee.jsp");
+	   mview.addObject("employee", employee);
+	   
+	   return mview; 
+	   }
 
 }

@@ -72,7 +72,7 @@
    <aside class="main-sidebar text-white elevation-4">
     <a href="" class="brand-link">
       <img src="CSS/icons.png" class="brand-image">
-      <span class="brand-text font-weight-larger" id="logo">LMS</span></a>
+      <span class="brand-text font-weight-larger" id="logo">BIZHUB</span></a>
       
  <div class="sidebar">
       <nav class="mt-2">

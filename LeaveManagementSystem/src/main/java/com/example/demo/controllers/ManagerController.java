@@ -187,6 +187,29 @@ public class ManagerController {
 				mview.addObject("manager", manager);
 				return mview;
 			}
-		
+		 @RequestMapping("/reset_pass_manager")
+			public ModelAndView resetPasswordManger(@RequestParam("email") String email,@RequestParam("oldPass1") String oldPass,@RequestParam("newPass") String newPass, HttpSession session) {
+			Manager manager=manRepository.findByEmailAndPassword(email, oldPass);
+				if(manager!=null) {
+				manager.setPassword(newPass);
+				manRepository.save(manager);				
+				}
+				return new ModelAndView("redirect:/logout");
+			}
+		 //view LEave Policy
+		 @RequestMapping("/view_leavepolicy_manager")
+			public ModelAndView sendManagerLeavePolicy(HttpServletRequest request) {
+//				System.out.println("manager id : "+session.getAttribute("id"));
+//				int id=(int) (session.getAttribute("id"));
+				System.out.println("manager id : "+request.getParameter("id"));
+				int id=Integer.parseInt(request.getParameter("id"));
+				System.out.println("manager id : "+id);
+				Manager manager=manRepository.getReferenceById(id);
+				request.setAttribute("manager", manager);
+				ModelAndView mview=new ModelAndView();
+				mview.setViewName("viewLeavePolicyManager.jsp");
+				mview.addObject("manager", manager);
+				return mview;
+			}
 
 }

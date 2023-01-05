@@ -9,8 +9,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
-@Table(name="manager_lms")
 @DynamicUpdate
+@Table(name="manager_lms")
 public class Manager {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

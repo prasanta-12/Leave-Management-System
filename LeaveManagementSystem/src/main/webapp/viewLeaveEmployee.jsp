@@ -213,6 +213,40 @@ font-size: 1rem;
 		
 			</table>
 			
+			
+			<h3>Leave Balance</h3>
+			<table class="table table-dark table-striped caption-top table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th> </th>
+						<th>Sick Leave</th>
+						<th>Casual Leave</th>
+						<th>Personal Leave</th>
+						<th>Maternity Leave</th>
+						<th>Paternity Leave</th>
+						<th>Marriage Leave</th>
+						<th>Adoption Leave</th>
+					</tr>
+				</thead>
+				
+				<tbody class="table-group-divider">
+				<%-- <c:forEach items="${leaves }" var="leave"> --%>
+				<tr class="table-active">
+                        <th scope="row">Days</th>
+                        <td>${employee.sickLeave }</td>
+                        <td>${employee.casualLeave }</td>
+                        <td>${employee.personalLeave }</td>
+                        <td>${employee.maternityLeave }</td>
+                        <td>${employee.paternityLeave }</td>
+                        <td>${employee.marriageLeave }</td>
+                        <td>${employee.adoptionLeave }</td>
+                        
+                      </tr>
+				<%-- </c:forEach> --%>
+                  
+				  </tbody>
+		
+			</table>
 		</div>
     </section>
   </div>
