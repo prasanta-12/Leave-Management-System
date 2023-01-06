@@ -260,8 +260,8 @@ font-size: 1rem;
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="addProjectAdmin.jsp" class="nav-link">
+           <li class="nav-item">
+            <a href="viewprojects?id=<c:out value='${admin.id}'/>" class="nav-link">
                 <i class="fas fa-project-diagram"></i>
                 <p class="text-white">
                   &nbsp;&nbsp;Project

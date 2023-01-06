@@ -271,7 +271,7 @@ font-size: 1rem;
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="viewprojects?id=<c:out value='${admin.id}'/>" class="nav-link">
                 <i class="fas fa-project-diagram"></i>
                 <p class="text-white">
                   &nbsp;&nbsp;Project

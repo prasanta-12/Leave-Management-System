@@ -192,14 +192,14 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="viewprojects?id=<c:out value='${admin.id}'/>" class="nav-link">
                 <i class="fas fa-project-diagram"></i>
                 <p class="text-white">
                   &nbsp;&nbsp;Project
               </p>
             </a>
           </li>
-         <li class="nav-item">
+          <li class="nav-item">
             <a href="set_add_manager?id=<c:out value='${admin.id}'/>" class="nav-link">
               <i class='fas fa-user-lock'></i>
              <p class="text-white">

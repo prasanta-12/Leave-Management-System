@@ -13,7 +13,7 @@ public class SendMail {
 		
 		public void sendMail( String toMail, String subject, String textBody,String fromMail) {
 			SimpleMailMessage massage=new SimpleMailMessage();
-			massage.setFrom("prasantamajhi549@gmail.com");
+			massage.setFrom("yourmail");
 			massage.setTo(toMail);
 			massage.setText(textBody);
 			

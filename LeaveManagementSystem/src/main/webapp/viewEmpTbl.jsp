@@ -158,14 +158,6 @@ font-size: 1rem;
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="fas fa-project-diagram"></i>
-                <p class="text-white">
-                  &nbsp;&nbsp;Add project
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="viewholidays?id=<c:out value='${admin.id}'/>" class="nav-link">
                 <i class="fas fa-gifts"></i>
               <p class="text-white">
@@ -200,6 +192,28 @@ font-size: 1rem;
                 <i class="fa fa-address-book"></i>
              <p class="text-white">
               &nbsp;&nbsp;Add Leave Policy</p> 
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="viewprojects?id=<c:out value='${admin.id}'/>" class="nav-link">
+                <i class="fas fa-project-diagram"></i>
+                <p class="text-white">
+                  &nbsp;&nbsp;Project
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="set_add_manager?id=<c:out value='${admin.id}'/>" class="nav-link">
+              <i class='fas fa-user-lock'></i>
+             <p class="text-white">
+              &nbsp;&nbsp;Add Manager</p> 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="viewmanagers?id=<c:out value='${admin.id}'/>" class="nav-link">
+              <i class='fas fa-user-edit'></i>
+             <p class="text-white">
+              &nbsp;&nbsp;Manage Manager</p> 
             </a>
           </li>
           <li class="nav-item">

@@ -1,46 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" isELIgnored="false"%>
+    pageEncoding="UTF-8"  isELIgnored="false"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LMS | Admin Dashboard</title>
- <!--  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
-   <!-- fontawsome -->
-     <!-- bootstrap modal-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha512-I5TkutApDjnWuX+smLIPZNhw+LhTd8WrQhdCKsxCFRSvhFx2km8ZfEpNIhF9nq04msHhOkE8BMOBj5QE07yhMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="assets/css/empStyle.css">
- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS | Projects</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/all.min.css">
-  <style>
-  .content-wrapper{
- background-image: url("emp1.jpg");
- background-repeat: no-repeat;
- background-size: cover;
-}
-  </style>
+  <!-- bootstrap modal-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha512-I5TkutApDjnWuX+smLIPZNhw+LhTd8WrQhdCKsxCFRSvhFx2km8ZfEpNIhF9nq04msHhOkE8BMOBj5QE07yhMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body class="hold-transition sidebar-mini">
-<!-- login/logout session management -->
- <%
-if(session.getAttribute("email") ==null){
-	response.sendRedirect("login.jsp");
-}
-%>
-
-  <!-- Side Navigation Bar start -->
-<div class="wrapper">
- <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <div class="wrapper">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+        <li class="nav-item ">
+        <a href="" class="nav-link" data-bs-toggle="modal" data-bs-target="#static">Project <i class='fa fa-plus-circle' style='color: white'></i></a>
       </li>
     </ul>
         <ul class="navbar-nav ml-auto">
@@ -127,11 +112,11 @@ if(session.getAttribute("email") ==null){
         </form>
     </div>
   </div>
-  <aside class="main-sidebar text-white elevation-4">
-    <a href="" class="brand-link">
+       <aside class="main-sidebar text-white elevation-4">
+   <a href="" class="brand-link">
       <img src="CSS/icons.png" class="brand-image">
       <span class="brand-text font-weight-larger" id="logo">BIZHUB</span></a>
-       <div class="sidebar">
+  <div class="sidebar">
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" role="menu" data-accordion="false">
           <li class="nav-item">
@@ -221,85 +206,197 @@ if(session.getAttribute("email") ==null){
       </nav>
     </div>
   </aside>
-  <div class="content-wrapper">
-    <section class="content-header">
-      <div class="container-fluid">
-     
+    <div class="content-wrapper">
+      <section class="content-header">
+ <div class="container-fluid">
+          <div class="d-flex justify-content-between">
+          <br>
+        <!-- Project Table start -->
+    <div class="container" id="projectTable">
+      <table class="table table-dark table-striped caption-top table-hover">
+				<thead class="thead-dark">
+          <tr>
+            <th>PID</th>
+            <th>Project Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Description</th>
+            <th>Team</th>
+            <th>Manager ID</th>
+         
+          </tr>
+				</thead>
+				
+				<tbody class="table-group-divider">
+				<c:forEach items="${projects }" var="project">
+					<tr class="table-active">
+					  <td>${project.id}</td>
+					  <td>${project.projectName}</td>
+					  <td>${project.strDate}</td>
+					  <td>${project.ndDate}</td>
+					  <td>${project.projectDesc}</td>
+					   <td >${project.projectTeam}</td>
+					  <td>${project.projectManager}</td>
+                     
+					<!--   <td datalabel="Action"><a href="#" class="acn_item" ><i class='fas fa-pencil-alt' style='color: #9d8189;'></i></a>&nbsp;&nbsp;
+              <a href="#" class="acn_item"><i class='fa fa-trash-alt' style='color: #9d8189;'></i>
+              </a>
+          </td>
+				 -->	</tr>
+				 </c:forEach>
+				  </tbody>
+		
+			</table>
+<!-- Project Table end -->
       </div>
-    </section>
   </div>
   <aside class="control-sidebar control-sidebar-dark">
   </aside>
- </div> 
-!--<!-- Side Navigation bar end -->
-<script>
-
-  function Validation(){
-
-    let valid=true;
-    const username=document.getElementById('email').value;
-    const password=document.getElementById('newPass').value;
-    const firstoldpassword=document.getElementById('oldPass').value;
-    const secondoldpassword=document.getElementById('oldPass1').value;
-    const confirmPass=document.getElementById('connewPass').value
-    const emailcheck=/^[A-Za-z_.0-9]{3,}@[A-Za-z]{3,}[.]{1}[a-zA-Z.]{2,6}$/;
-    const passwordcheck=/^(?=.[0-9])(?=.[!@#$%^&])[A-Za-z0-9!@#$%^&]{8,16}$/;
-
-    // check email of employee
-  if (emailcheck.test(username)){
-    document.getElementById('emailerror').innerHTML=""
-  }
-  else{
-    document.getElementById('emailerror').innerHTML="Email is Invalid";
-    valid=false;
-  }
-
-  // check password of user
-  /* if (passwordcheck.test(password)){
-     document.getElementById('newPassErr').innerHTML=""
-  }
-  else{
-     document.getElementById('newPassErr').innerHTML="Password is Invalid";
-     valid=false;
-  } */
-// check password of user old pass
-  if (firstoldpassword===secondoldpassword){
-     document.getElementById('oldPassErr1').innerHTML=""
-  }
-  else{
-     document.getElementById('oldPassErr1').innerHTML="Password is Invalid";
-     valid=false;
-  }
-
-
-  // check password of user
-  if (password!=confirmPass){
-     document.getElementById('ConnewPassErr').innerHTML="Password did not match"
-     valid=false;
-  }
-  else{
-     document.getElementById('ConnewPassErr').innerHTML="";
+</div>
+      </section>
      
-  }
-       
-   return valid;
-  }
-
-</script>
+    </div>
+    <aside class="control-sidebar control-sidebar-dark">
+    </aside>
+  </div>
+  <!-- Side Navigation bar end -->
+  <!-- Modal -->
+  <div class="modal fade"  id="static" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Add a Project</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form  name="projectForm" id="projectForm" action="add_project"   onsubmit="return Validation()" >
+          <div class="modal-body ">
+              <div class="container-fluid">
+    
+                  <div class="row p-3">
+                      <div class="col-md-10" >
+                          <label  class="form-label">Project Name</label>
+                          <input type="text" class="form-control" name="inputName" id="inputName" required>
+                          <span id="prjnameerror" class="text-danger font-weight-bold"></span>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                      <div class="col-md-5" >
+                          <label  class="form-label">Start Date</label>
+                          <input type="date" class="form-control" name="strDate"  id="strDate"required>
+                      </div>
+                      <div class="col-md-5" >
+                          <label  class="form-label">End Date</label>
+                          <input type="date" class="form-control" name="ndDate" id="ndDate"required>
+                      </div>
+                    </div>
+                    <div class="row p-3">
+                      <div class="col-md-5" >
+                          <label for="projectTeam" class="form-label">Assign to team </label>
+                          <input type="text" class="form-control" name="projectTeam" id="projectTeam"required>
+                          <span id="assignteamerror" class="text-danger font-weight-bold"></span>
+                      </div>
+                      <div class="col-md-5" >
+                          <label for="projectManager" class="form-label">Reporting Manager</label>
+                          <select id="projectManager" class="form-select" name="projectManager" required="required">
+                    <option selected>Choose...</option>
+                    <c:forEach items="${managers }" var="manager">
+                    <option value="${manager.id}">${manager.fullname}</option>
+                    </c:forEach>
+                  </select>
+                          <span id="prjmangerror" class="text-danger font-weight-bold"></span>
+                      </div>
+                    </div>
+                    <div class="row p-2">
+                      <div class="col-md-10" >
+                          <label for="projectDesc" class="form-label">Description of project</label>
+                          <textarea class="form-control" id="projectDesc" name="projectDesc" id="" cols="1" rows="1" required></textarea>
+                          <span id="descprjerror" class="text-danger font-weight-bold"></span>
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary " id="savebtn">Save</button>
+                  </div>
+              </form>
+      </div>
+    </div>
+  </div>
 <script>
-//The Clock
-function updateTime() {
-  // Getting the current time
-  var currentTime = new Date();
-  // Format the time as HH:MM:SS
-  var formattedTime = currentTime.getHours() + ':' + currentTime.getMinutes() + ':' + currentTime.getSeconds();
-   // Update the container element with the formatted time
-  document.getElementById('time-container').innerHTML = formattedTime;
-}
-// Update the time every second
-setInterval(updateTime, 1000);
-</script>
- <!-- javascript -->
+  var date=new Date();
+  var currDate=date.getDate();
+
+  var currMonth=date.getMonth()+1;
+   var maxMonth=currMonth+(11-date.getMonth());
+  // console.log("Max Month "+maxMonth);
+  if(currDate<10){
+    currDate='0'+currDate;
+  }
+  if(currMonth<10){
+    currMonth='0'+currMonth;
+  }
+  if(maxMonth<10){
+    currMonth='0'+maxMonth;
+  }
+  var currYear=date.getUTCFullYear();
+  var maxYear=date.getUTCFullYear()+1;
+  var minDate=currYear+"-"+currMonth+"-"+currDate;
+  var maxDate=maxYear+"-"+currMonth+"-"+currDate;
+
+  document.getElementById("strDate").setAttribute('min',minDate);
+  document.getElementById("strDate").setAttribute('max',maxDate);
+  
+      </script>
+
+      <!-- javascript validation -->
+      <script>
+        function setError(id,error){
+        element =document.getElementById(id);
+        element.getElementsByClassName('invalidForm')[0].innerHTML=error;
+      }
+      function isValidForm(){
+        var isValid=true;
+        let HolidayName=document.forms['holiDForm']['hDayName'].value;
+        // let Location=document.forms['holiDForm']['hDayLocation'].value;
+        let HolidayDesc=document.forms['holiDForm']['hDayDesc'].value;
+
+        const nameChecker=/^[A-Za-z ]{2,30}$/;
+        console.log("Holiday Name : "+HolidayName);
+        // Holiday name
+        if(nameChecker.test(HolidayName) ){
+          setError("hDayName","");
+        }
+        else{
+          setError("hDayName","*should contain only character and should be atleast two characters ");
+          isValid=false;
+        }
+        // Holiday Description
+        if(HolidayDesc.length<15 ){
+          setError("hDayDesc","*should be more than 15 character");
+          isValid=false;
+        }
+        else{
+          setError("hDayDesc","");
+        }
+        return isValid;
+      }
+      </script>
+<script>
+  function updateTime() {
+    // Getting the current time
+    var currentTime = new Date();
+    // Format the time as HH:MM:SS
+    var formattedTime = currentTime.getHours() + ':' + currentTime.getMinutes() + ':' + currentTime.getSeconds();
+     // Update the container element with the formatted time
+    document.getElementById('time-container').innerHTML = formattedTime;
+  }
+  // Update the time every second
+  setInterval(updateTime, 1000);
+        </script>  
+
+
+  <!-- javascript -->
       <script src="plugins/jquery/jquery.min.js"></script>
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/style.min.js"></script>

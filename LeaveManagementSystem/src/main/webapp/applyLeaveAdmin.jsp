@@ -189,8 +189,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="../UI/addProject.html" class="nav-link">
+         <li class="nav-item">
+            <a href="viewprojects?id=<c:out value='${admin.id}'/>" class="nav-link">
                 <i class="fas fa-project-diagram"></i>
                 <p class="text-white">
                   &nbsp;&nbsp;Project
@@ -198,14 +198,14 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="../UI/addmanager.html" class="nav-link">
+            <a href="set_add_manager?id=<c:out value='${admin.id}'/>" class="nav-link">
               <i class='fas fa-user-lock'></i>
              <p class="text-white">
               &nbsp;&nbsp;Add Manager</p> 
             </a>
           </li>
           <li class="nav-item">
-            <a href="../UI/manageMR.html" class="nav-link">
+            <a href="viewmanagers?id=<c:out value='${admin.id}'/>" class="nav-link">
               <i class='fas fa-user-edit'></i>
              <p class="text-white">
               &nbsp;&nbsp;Manage Manager</p> 
